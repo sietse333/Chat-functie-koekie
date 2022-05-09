@@ -16,7 +16,10 @@ Should haves:
 
 Could haves:
 - Emoticons naar elkar sturen voor een quickchat functie
+- Punten systeem
 
 Wont haves:
 - Pokemon generation kunnen kiezen
 - Stem functie voor die generation mid game te kunnen veranderen
+- Ranked functie
+- Inlog die je rank onthoud
