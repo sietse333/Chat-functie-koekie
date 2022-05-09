@@ -23,3 +23,5 @@ Wont haves:
 - Stem functie voor die generation mid game te kunnen veranderen
 - Ranked functie
 - Inlog die je rank onthoud
+
+![image](https://user-images.githubusercontent.com/43068118/167409208-2070b072-d204-4421-86c2-0a3548ace2a8.png)
