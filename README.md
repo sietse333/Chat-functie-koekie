@@ -80,9 +80,9 @@ Now i can use that to get what i need which are the sprite and the name of the p
 
 
 
-## Used packages
+### Used packages
 
-### Ejs
+#### Ejs
 
 Ejs is a templating package which lets you mix javascript and html in the same file. I find this really helpful and it makes the whole project a little more easy to read. 
 
@@ -95,7 +95,7 @@ app.set('view engine', 'ejs');
 
 https://www.npmjs.com/package/ejs
 
-### Express
+#### Express
 
 Express is a framework package and it helps you with the routing in your application. You can use it like this for example to load up your home page:
 ```
@@ -112,7 +112,7 @@ const express = require('express')
 
 https://expressjs.com/en/starter/installing.html
 
-### Node-fetch
+#### Node-fetch
 
 Node-fetch is a must have package which lets you use fetch requests on the server side. Not really much to say here :P
 
@@ -125,7 +125,7 @@ const fetch = require('node-fetch')
 
 https://www.npmjs.com/package//node-fetch
 
-### Socket.io
+#### Socket.io
 
 Socket.IO is a library that enables low-latency, bidirectional and event-based communication between a client and a server. Simply said its helps you make a lasting connection to other people in your application. I need this in my app so the 2 players see the same pokemon and guess on it too.
 
@@ -141,7 +141,7 @@ let socket = io()
 
 https://www.npmjs.com/package/socket.io
 
-### Nodemon
+#### Nodemon
 
 Nodemon is a really helpful package which lets you make changes to your node based application without you having to restart it all the time. Nodemon does that itself so you can just focus on your work.
 ```
