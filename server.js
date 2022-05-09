@@ -15,29 +15,55 @@ app.set('views', 'views');
 app.use(express.static(path.resolve('public')))
 
 
-app.get('/', (req, res) => {
-  let pokeNummer = Math.floor(Math.random() * 151);
-      fetch(`https://pokeapi.co/api/v2/pokemon/`+pokeNummer+``)
-        .then(response => response.json())
-        .then(function (pokeData) {
-          res.render('index', {
-            data: pokeData
-          });
-        })
+// IK MOET DIT VERWERKEN IN DE SERVER STARTup WANT HET WILT GETPOKEMON() KRIJGEN
+let currentPokemon = null
+app.get('/', async (req, res) => {
+  if (!currentPokemon) {
+    currentPokemon = await getPokemon()
+  }
+  res.render('index', {
+    data: currentPokemon
+  });
 })
 
-    // io.on('connection', (socket) => {
-    //   console.log('a user connected')
+// oude function doe ik nu in script
 
-    //   socket.on('message', (message) => {
-    //     io.emit('message', message)
-    //   })
+function getPokemon() {
+  let pokeNummer = Math.floor(Math.random() * 151);
+  return fetch(`https://pokeapi.co/api/v2/pokemon/` + pokeNummer + ``)
+    .then(response => response.json())
+}
 
-    //   socket.on('disconnect', () => {
-    //     console.log('user disconnected')
-    //   })
-    // })
+io.on('connection', (socket) => {
+  console.log('a user connected')
 
-    http.listen(port, () => {
-      console.log('listening on port ', port)
+  // Function die ik probeer aan te roepen via me script
+  socket.on('refreshPokemon', () => {
+    getPokemon().then(response => {
+      socket.emit('pokemonHTML', response)
     })
+  })
+
+
+  socket.on('disconnect', () => {
+    console.log('user disconnected')
+  })
+})
+
+http.listen(port, () => {
+  console.log('listening on port ', port)
+})
+
+
+// Oude manier van renderen
+
+// app.get('/', (req, res) => {
+//   let pokeNummer = Math.floor(Math.random() * 151);
+//       fetch(`https://pokeapi.co/api/v2/pokemon/`+pokeNummer+``)
+//         .then(response => response.json())
+//         .then(function (pokeData) {
+//           res.render('index', {
+//             data: pokeData
+//           });
+//         })
+// })

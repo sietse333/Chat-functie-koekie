@@ -13,8 +13,10 @@
     <main>
         <section>
             <h1> Pokemon guesser!</h1>
-            <img id="plaatjePokemon" src="<%- data.sprites.front_default %>" alt="Pokemon plaatje">
-            <h2 id="naamPokemon"><%- data.forms[0].name %></h2>
+            <div id="divArea">
+                <img id="plaatjePokemon" src="<%- data.sprites.front_default %>" alt="Pokemon plaatje">
+                <h2 id="naamPokemon"><%- data.forms[0].name %></h2>
+            </div>
             <article>
                 <div id="player1div">
                     <input id="textVeld" type="password" autocomplete="off">
