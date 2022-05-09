@@ -149,6 +149,28 @@ npm install -g nodemon
 ```
 https://www.npmjs.com/package/nodemon
 
+## How to install?
+
+### Clone this repo
+
+You can clone it by opening my repo with Github desktop or you can use this link yo clone it https://github.com/sietse333/Pokeguesser-antonio.git
+
+### Install the packages
+
+This project uses a few packages so by typing in ``` npm install ``` in your terminal you install all the packages i have used in this project
+
+### Start the server
+
+You can start the server by typing ``` npm run start ``` in your terminal. Now your local server is running.
+
+### Now to go to the page
+
+You can go to the page by typing in this link in your browser of choice:
+
+```
+https://localhost:1234/
+```
+
 
 
 
