@@ -8,15 +8,15 @@
 **MoSCoW 9-5-2022
 
 Must haves:
--Zorgen dat beide spelers dezelfde pokemon zien
--Linker kant voor alleen speler 1 maken en de rechter kant voor alleen speler 2
+- Zorgen dat beide spelers dezelfde pokemon zien
+- Linker kant voor alleen speler 1 maken en de rechter kant voor alleen speler 2
 
 Should haves:
--Chat functie
+- Chat functie
 
 Could haves:
--Emoticons naar elkar sturen voor een quickchat functie
+- Emoticons naar elkar sturen voor een quickchat functie
 
 Wont haves:
--Pokemon generation kunnen kiezen
--Stem functie voor die generation mid game te kunnen veranderen
+- Pokemon generation kunnen kiezen
+- Stem functie voor die generation mid game te kunnen veranderen
