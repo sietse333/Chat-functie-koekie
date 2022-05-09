@@ -171,7 +171,6 @@ You can go to the page by typing in this link in your browser of choice:
 https://localhost:1234/
 ```
 
-
-
+## Data model
 
 ![datamodel](https://user-images.githubusercontent.com/43068118/165272617-6afd4223-867e-47fa-8d16-407d7dc80efe.jpg)
