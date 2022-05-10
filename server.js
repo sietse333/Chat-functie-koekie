@@ -27,8 +27,7 @@ app.get('/', async (req, res) => {
 })
 
 // oude function doe ik nu in script
-
-function getPokemon() {
+getPokemon = () => {
   let pokeNummer = Math.floor(Math.random() * 151);
   return fetch(`https://pokeapi.co/api/v2/pokemon/` + pokeNummer + ``)
     .then(response => response.json())
@@ -40,10 +39,19 @@ io.on('connection', (socket) => {
   // Function die ik probeer aan te roepen via me script
   socket.on('refreshPokemon', () => {
     getPokemon().then(response => {
-      socket.emit('pokemonHTML', response)
+      io.emit('pokemonHTML', response)
     })
   })
 
+  // player 1 function
+  socket.on('player1Check', (check1) => {
+    io.emit('player1Checkcode', check1)
+  })
+
+  // player 2 function
+  socket.on('player2Check', (check2) => {
+    io.emit('player2Checkcode', check2)
+  })
 
   socket.on('disconnect', () => {
     console.log('user disconnected')
@@ -53,17 +61,3 @@ io.on('connection', (socket) => {
 http.listen(port, () => {
   console.log('listening on port ', port)
 })
-
-
-// Oude manier van renderen
-
-// app.get('/', (req, res) => {
-//   let pokeNummer = Math.floor(Math.random() * 151);
-//       fetch(`https://pokeapi.co/api/v2/pokemon/`+pokeNummer+``)
-//         .then(response => response.json())
-//         .then(function (pokeData) {
-//           res.render('index', {
-//             data: pokeData
-//           });
-//         })
-// })

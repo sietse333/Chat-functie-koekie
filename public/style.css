@@ -64,7 +64,9 @@ article{
 }
 
 h2{
+  font-family: 'pokemon';
   visibility: hidden;
+
 }
 
 .zichtbaar {
@@ -76,3 +78,6 @@ h2{
   filter: brightness(0%);
 }
 
+#divArea{
+  text-align: center;
+}
