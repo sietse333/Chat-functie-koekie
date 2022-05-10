@@ -7,6 +7,8 @@ textVeld = document.getElementById("textVeld");
 textveld2 = document.getElementById("textveld2");
 pokeNaam = document.getElementById("naamPokemon");
 pokePlaatje = document.getElementById("plaatjePokemon");
+pokeSpelers = document.getElementById("pokeSpelers");
+
 
 // Volgende pokemon
 nextB.addEventListener("click", function () {
@@ -15,25 +17,34 @@ nextB.addEventListener("click", function () {
 
 })
 
-// Player 1
-document.getElementById("checkKnop").addEventListener('keypress', function (e) {
-  if (e.key === 'Enter') {
-    // Start van de function via emit
-    socket.emit('player1Check' ,  textVeld.value);
-  }
-  
 
+
+// Player 1
+document.getElementById("checkKnop").addEventListener("click", function () {
+  // Start van de function via emit
+  socket.emit('player1Check' ,  textVeld.value);
 
 })
 
 // Player 2
-document.getElementById("checkKnop2").addEventListener('keypress', function (e) {
-  if (e.key === 'Enter') {
-    // Start van de function via emit
-    socket.emit('player2Check' ,  textVeld.value);
-  }
-
+document.getElementById("checkKnop2").addEventListener("click", function () {
+  // Start van de function via emit
+  socket.emit('player2Check', textVeld2.value);
 })
+
+// Player 1 enter
+textVeld.addEventListener('keypress', function (e) {
+  if (e.key === 'Enter') {
+    socket.emit('player1Check' ,  textVeld.value);
+  }
+});
+
+// Player 2 enter
+textVeld2.addEventListener('keypress', function (e) {
+  if (e.key === 'Enter') {
+    socket.emit('player2Check', textVeld2.value);
+  }
+});
 
 // Player 1 code  
 socket.on('player1Checkcode', player1Checkcode => {
@@ -51,6 +62,7 @@ socket.on('player1Checkcode', player1Checkcode => {
     document.getElementById("naamPokemon").classList.add('zichtbaar')
     document.getElementById("plaatjePokemon").classList.add('zichtbaar')
   }
+  nextB.focus()
 })
 
 // Player 2 code
@@ -69,7 +81,20 @@ socket.on('player2Checkcode', player2Checkcode => {
     document.getElementById("naamPokemon").classList.add('zichtbaar')
     document.getElementById("plaatjePokemon").classList.add('zichtbaar')
   }
+  nextB.focus()
 })
+
+socket.on('err', err =>{
+  alert("Maximaal aantal spelers is berijkt")
+
+})
+
+socket.on('count', count =>{
+  pokeSpelers.innerHTML = '';
+  pokeSpelers.innerHTML = "aantal spelers" + ":" + count.counter
+
+})
+
 
 // Next pokemon button actie
 socket.on('pokemonHTML', pokemonHTML => {
