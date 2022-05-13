@@ -75,12 +75,111 @@ Now i can use that to get what i need which are the sprite and the name of the p
 <img id="plaatjePokemon" src="<%- data.sprites.front_default %>" alt="Pokemon plaatje">
 <h2 id="naamPokemon"><%- data.forms[0].name %></h2>
 ```
-
-## Real-time events
+## Data lifecycle diagram
 
 ![wiregang](https://user-images.githubusercontent.com/43068118/168251766-7f491a84-45b2-4bfe-a897-ef1925e401ec.png)
 
+## Real-time events
 
+### player 1 check
+
+#### Server
+```
+    socket.on('player1Check', (check1) => {
+      io.emit('player1Checkcode', check1)
+    })
+```
+
+#### Script
+```
+socket.on('player1Checkcode', player1Checkcode => {
+  const naamPokemon = document.getElementById('naamPokemon').innerHTML;
+  if (naamPokemon === player1Checkcode) {
+    div1.classList.add('goedantwoord', 'ingevuld')
+  } else {
+    div1.classList.add('foutantwoord', 'ingevuld')
+  }
+  if (div1.classList.contains('goedantwoord') && div2.classList.contains('goedantwoord')) {
+    startConfetti();
+  }
+  if (div1.classList.contains('ingevuld') && div2.classList.contains('ingevuld')) {
+    nextB.classList.add('zichtbaar')
+    document.getElementById("naamPokemon").classList.add('zichtbaar')
+    document.getElementById("plaatjePokemon").classList.add('zichtbaar')
+  }
+  nextB.focus()
+})
+```
+
+### Refresh Pokemon
+
+#### Server
+```
+ socket.on('refreshPokemon', () => {
+      getPokemon().then(response => {
+        io.emit('pokemonHTML', response)
+      })
+    })
+ ```
+
+#### Script
+
+```
+socket.on('pokemonHTML', pokemonHTML => {
+  console.log(pokemonHTML)
+  document.getElementById("textVeld").value = ''
+  document.getElementById("textVeld2").value = ''
+  nextB.classList.remove('zichtbaar')
+  pokeNaam.classList.remove('zichtbaar')
+  pokePlaatje.classList.remove('zichtbaar')
+  div1.classList.remove('foutantwoord', 'ingevuld', 'goedantwoord')
+  div2.classList.remove('foutantwoord', 'ingevuld', 'goedantwoord')
+  stopConfetti();
+  divArea.innerHTML = '';
+  divArea.insertAdjacentHTML(
+    'afterbegin',
+    `<img id="plaatjePokemon" src="${pokemonHTML.sprites.front_default}" alt="Pokemon plaatje">
+     <h2 id="naamPokemon">${pokemonHTML.forms[0].name}</h2>
+    `)
+})
+```
+
+### Counter + disconnect
+
+#### Server
+```
+ if (io.engine.clientsCount > connectionsLimit) {
+    socket.emit('err', {
+```
+
+```
+    io.emit('count', {
+      counter: io.engine.clientsCount 
+    })
+```
+
+```
+  socket.on('disconnect', () => {
+    io.emit('count', {
+      counter: io.engine.clientsCount 
+    })
+    console.log('user disconnected')
+  })
+})
+```
+#### Script
+```
+socket.on('err', err =>{
+  alert("Maximaal aantal spelers is berijkt")
+})
+```
+```
+socket.on('count', count =>{
+  pokeSpelers.innerHTML = '';
+  pokeSpelers.innerHTML = "aantal spelers" + ":" + count.counter
+
+})
+```
 
 ### Used packages
 
