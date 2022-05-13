@@ -78,6 +78,8 @@ Now i can use that to get what i need which are the sprite and the name of the p
 
 ## Real-time events
 
+![wiregang](https://user-images.githubusercontent.com/43068118/168251766-7f491a84-45b2-4bfe-a897-ef1925e401ec.png)
+
 
 
 ### Used packages
